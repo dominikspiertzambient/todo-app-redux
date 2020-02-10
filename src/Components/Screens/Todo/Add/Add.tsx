@@ -1,4 +1,4 @@
-import { TodoContext } from '../../../../Providers';
+import { ToastContext, TodoContext } from '../../../../Providers';
 import React, { ChangeEvent, FC, useContext, useState } from 'react';
 import { Button, Form, Input } from 'antd';
 import { Todo } from '../../../../Providers/Todo/Todo';
@@ -10,12 +10,28 @@ interface Fields {
 
 export const Add: FC = () => {
   const { todos, setTodos } = useContext(TodoContext);
+  const { showToast } = useContext(ToastContext);
   const [fields, setFields] = useState<Fields>();
 
   const handleClick = () => {
     if (fields?.body && fields.title) {
-      const updatedTodos: Todo[] = [...todos, { title: fields.title, body: fields.body }];
-      setTodos(updatedTodos);
+      const alreadyExistingTodo = todos.find(({ title }) => title === fields.title);
+
+      if (!alreadyExistingTodo) {
+        const updatedTodos: Todo[] = [...todos, { title: fields.title, body: fields.body }];
+        showToast({
+          type: 'success',
+          message: 'Todo hinzugefügt',
+          description: `Das Todo "${fields.title}" wurde hinzugefügt.`,
+        });
+        setTodos(updatedTodos);
+      } else {
+        showToast({
+          type: 'error',
+          message: 'Todo existiert bereits',
+          description: `Ein Todo mit dem Namen "${fields.title}" befindet sich bereits in der Liste. Bitte wähle einen anderen Namen.`,
+        });
+      }
     }
   };
 
