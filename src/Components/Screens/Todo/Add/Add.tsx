@@ -9,13 +9,13 @@ interface Fields {
 }
 
 export const Add: FC = () => {
-  const { tasks, setTasks } = useContext(TodoContext);
+  const { todos, setTodos } = useContext(TodoContext);
   const [fields, setFields] = useState<Fields>();
 
   const handleClick = () => {
     if (fields?.body && fields.title) {
-      const updatedTasks: Todo[] = [...tasks, { title: fields.title, body: fields.body }];
-      setTasks(updatedTasks);
+      const updatedTodos: Todo[] = [...todos, { title: fields.title, body: fields.body }];
+      setTodos(updatedTodos);
     }
   };
 

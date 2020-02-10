@@ -6,17 +6,17 @@ export interface Todo {
 }
 
 interface TodoContextProps {
-  setTasks: Dispatch<SetStateAction<Todo[]>>;
-  tasks: Todo[];
+  setTodos: Dispatch<SetStateAction<Todo[]>>;
+  todos: Todo[];
 }
 
 export const TodoContext = createContext<TodoContextProps>({
-  tasks: [],
-  setTasks: () => undefined,
+  setTodos: () => undefined,
+  todos: [],
 });
 
 export const TodoProvider: FC = ({ children }) => {
-  const [tasks, setTasks] = useState<Todo[]>([]);
+  const [todos, setTodos] = useState<Todo[]>([{ body: 'Wohnzimmer, Küche', title: 'Aufräumen' }]);
 
-  return <TodoContext.Provider value={{ tasks, setTasks }}>{children}</TodoContext.Provider>;
+  return <TodoContext.Provider value={{ todos, setTodos }}>{children}</TodoContext.Provider>;
 };

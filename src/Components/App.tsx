@@ -1,11 +1,13 @@
 import React from 'react';
-import { List } from './Screens/Tasks/List';
-import { Add } from './Screens/Tasks/Add';
-import { TodoProvider } from '../Providers/Todo';
+import { List } from './Screens/Todo/List';
+import { Add } from './Screens/Todo/Add';
+import { ModalProvider, TodoProvider } from '../Providers';
 
 export const App = () => (
-  <TodoProvider>
-    <List />
-    <Add />
-  </TodoProvider>
+  <ModalProvider>
+    <TodoProvider>
+      <List />
+      <Add />
+    </TodoProvider>
+  </ModalProvider>
 );
