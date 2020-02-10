@@ -1,22 +1,28 @@
-import React, {FC, useContext} from 'react';
-import {TasksContext} from '../../../../Providers/Tasks';
+import React, { FC, useContext } from 'react';
+import { TodoContext } from '../../../../Providers/Todo';
+import { Col, Row } from 'antd';
+import { Todo } from './Todo/Todo';
 
 export const List: FC = () => {
-  const {tasks} = useContext(TasksContext);
+  const { tasks } = useContext(TodoContext);
+  let todos: JSX.Element = <p>Keine Todos verfügbar.</p>;
 
-  if(tasks?.length > 0) {
-   return (
-     <>
-       <h1>Todos</h1>
-       {tasks.map(({body, title}) => (
-         <div key={`task_`}>
-           <h2>{title}</h2>
-           <p>{body}</p>
-         </div>
-       ))}
-     </>
-   );
+  if (tasks?.length > 0) {
+    todos = (
+      <Row gutter={[24, 24]} type='flex'>
+        {tasks.map((props, index) => (
+          <Col key={`task_${index}`} xs={24} md={12} lg={8}>
+            <Todo {...props} />
+          </Col>
+        ))}
+      </Row>
+    );
   }
 
-  return <p>Keine Todos verfügbar.</p>
-}
+  return (
+    <div className='container'>
+      <h1>Todos</h1>
+      {todos}
+    </div>
+  );
+};

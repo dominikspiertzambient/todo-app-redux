@@ -20,13 +20,20 @@
     "typescript": "~3.7.2"
   },
   "devDependencies": {
-    "create-react-app": "^3.3.1"
+    "create-react-app": "^3.3.1",
+    "prettier": "^1.19.1",
+    "tslint": "^6.0.0",
+    "tslint-config-airbnb": "^5.11.2",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.1.0",
+    "tslint-react": "^4.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn tslint --project ."
   },
   "eslintConfig": {
     "extends": "react-app"
